@@ -1,11 +1,15 @@
 package com.example.androidlessons
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +19,8 @@ import java.time.LocalTime
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
+    private lateinit var toolbarMain: androidx.appcompat.widget.Toolbar
+
     private lateinit var firstOperandEV: EditText
     private lateinit var secondOperandEV: EditText
 
@@ -22,6 +28,34 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var difBTN: Button
 
     private lateinit var resultTV: TextView
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+
+        return true
+    }
+
+    @SuppressLint("ResourceAsColor")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.resetMenuMain -> {
+                firstOperandEV.text.clear()
+                secondOperandEV.text.clear()
+                resultTV.setTextColor(resources.getColor(R.color.black, theme))
+                resultTV.text = "Результат"
+                Toast.makeText(applicationContext, "Данные очищены", Toast.LENGTH_SHORT).show()
+            }
+            R.id.exitMenuMain -> {
+                finish()
+                Toast.makeText(applicationContext, "Приложение закрыто", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +66,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        toolbarMain = findViewById(R.id.toolbarMain)
+        setSupportActionBar(toolbarMain)
+        title = "  Калькулятор времени"
+        toolbarMain.subtitle = "   v0.1"
+        toolbarMain.setLogo(R.drawable.baseline_access_time_24)
+
 
         firstOperandEV = findViewById(R.id.firstOperandET)
         secondOperandEV = findViewById(R.id.secondOperandET)
@@ -45,6 +86,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    @SuppressLint("ResourceAsColor")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onClick(v: View) {
         val time1 = timeParse(firstOperandEV.text.toString())
@@ -65,7 +107,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             else -> LocalTime.of(0, 0, 0)
         }
 
+        resultTV.setTextColor(resources.getColor (R.color.color6task, theme))
         resultTV.text = formatTime(res)
+        Toast.makeText(applicationContext, "Результат: ${formatTime(res)}", Toast.LENGTH_SHORT).show()
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

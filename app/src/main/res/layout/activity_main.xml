@@ -1,104 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color3"
-    tools:context=".MainActivity">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color3"
+        tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/titileTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Калькулятор времени"
-        android:textColor="@color/color1"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#006400"
+            app:titleTextColor="@color/color1"
+            tools:ignore="MissingConstraints" />
+
 
     <LinearLayout
-        android:id="@+id/linearLayoutInputOperand"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8sp"
-        android:layout_marginRight="8sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titileTV"
-        app:layout_constraintVertical_bias="0.1">
-
-        <EditText
-            android:textColor="@color/color1"
-            android:id="@+id/firstOperandET"
+            android:id="@+id/linearLayoutInputOperand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8pt"
-            android:layout_weight="1" />
+            android:layout_marginLeft="8sp"
+            android:layout_marginRight="8sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbarMain"
+            app:layout_constraintVertical_bias="0.1">
 
         <EditText
-            android:textColor="@color/color1"
-            android:id="@+id/secondOperandET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8pt"
-            android:layout_weight="1" />
+                android:textColor="@color/black"
+                android:id="@+id/firstOperandET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8pt"
+                android:layout_weight="1" />
+
+        <EditText
+                android:textColor="@color/black"
+                android:id="@+id/secondOperandET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8pt"
+                android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayoutChoiseOperator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8pt"
-        android:layout_marginRight="8pt"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayoutInputOperand"
-        app:layout_constraintVertical_bias="0.1">
-
-        <Button
-            android:id="@+id/sumBTN"
-            android:textColor="@color/color1"
-            android:backgroundTint="@color/color2"
+            android:id="@+id/linearLayoutChoiseOperator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="+"
-            android:layout_weight="1"
-            android:textSize="22sp" />
+            android:layout_marginLeft="8pt"
+            android:layout_marginRight="8pt"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutInputOperand"
+            app:layout_constraintVertical_bias="0.1">
 
         <Button
-            android:id="@+id/difBTN"
-            android:textColor="@color/color1"
-            android:backgroundTint="@color/color2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="-"
-            android:layout_weight="1"
-            android:textSize="22sp" />
+                android:id="@+id/sumBTN"
+                android:textColor="@color/color1"
+                android:backgroundTint="@color/color4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:layout_weight="1"
+                android:textSize="22sp" />
+
+        <Button
+                android:id="@+id/difBTN"
+                android:textColor="@color/color1"
+                android:backgroundTint="@color/color4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:layout_weight="1"
+                android:textSize="22sp" />
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/resultRV"
-        android:textColor="@color/color2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:gravity="center_horizontal"
-        android:textSize="36sp"
-        android:text="Результат:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutChoiseOperator"
-        app:layout_constraintVertical_bias="0.2"
-        />
+            android:id="@+id/resultRV"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="center_horizontal"
+            android:textSize="36sp"
+            android:text="Результат:"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutChoiseOperator"
+            app:layout_constraintVertical_bias="0.2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
