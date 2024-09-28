@@ -44,4 +44,4 @@
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone --branch=Time-calculator-program https://github.com/PawPrintsInTheDark/AndroidLessons.git
+   git clone --branch=Toolbar-Menu-Toast https://github.com/PawPrintsInTheDark/AndroidLessons.git
