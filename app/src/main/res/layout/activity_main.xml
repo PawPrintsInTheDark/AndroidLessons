@@ -18,83 +18,28 @@
             tools:ignore="MissingConstraints" />
 
 
-    <LinearLayout
-            android:id="@+id/linearLayoutInputOperand"
-            android:layout_width="match_parent"
+    <EditText
+            android:id="@+id/textET"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8sp"
-            android:layout_marginRight="8sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbarMain"
-            app:layout_constraintVertical_bias="0.1">
-
-        <EditText
-                android:textColor="@color/black"
-                android:id="@+id/firstOperandET"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8pt"
-                android:layout_weight="1" />
-
-        <EditText
-                android:textColor="@color/black"
-                android:id="@+id/secondOperandET"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8pt"
-                android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/linearLayoutChoiseOperator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8pt"
-            android:layout_marginRight="8pt"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutInputOperand"
-            app:layout_constraintVertical_bias="0.1">
-
-        <Button
-                android:id="@+id/sumBTN"
-                android:textColor="@color/color1"
-                android:backgroundTint="@color/color4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="+"
-                android:layout_weight="1"
-                android:textSize="22sp" />
-
-        <Button
-                android:id="@+id/difBTN"
-                android:textColor="@color/color1"
-                android:backgroundTint="@color/color4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_weight="1"
-                android:textSize="22sp" />
-
-    </LinearLayout>
-
-    <TextView
-            android:id="@+id/resultRV"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:gravity="center_horizontal"
-            android:textSize="36sp"
-            android:text="Результат:"
+            android:textSize="20sp"
+            android:hint="@string/input_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutChoiseOperator"
-            app:layout_constraintVertical_bias="0.2" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbarMain"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+            android:id="@+id/randomBTN"
+            android:backgroundTint="@color/color4"
+            android:layout_marginLeft="35pt"
+            android:layout_marginRight="35pt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:text="@string/text_random_number"
+            app:layout_constraintTop_toBottomOf="@+id/textET"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
