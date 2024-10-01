@@ -1,10 +1,7 @@
 <resources>
     <string name="app_name">AndroidLessons</string>
-    <string name="reset">Reset</string>
-    <string name="exit">Exit</string>
-    <string name="input_text">Оценка</string>
-    <string name="title_color_quality">Цветовое качество</string>
-    <string name="title_exit">Выход из приложения</string>
-    <string name="text_random_number">Случайное число</string>
+    <string name="delete_data">Удалить данные</string>
+    <string name="save_data">Сохранить данные</string>
+    <string name="input_hint">Введите данные</string>
 
 </resources>
