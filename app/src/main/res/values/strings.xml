@@ -3,5 +3,6 @@
     <string name="delete_data">Удалить данные</string>
     <string name="save_data">Сохранить данные</string>
     <string name="input_hint">Введите данные</string>
+    <string name="information">Информация</string>
 
 </resources>
