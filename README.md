@@ -1,7 +1,3 @@
-# Time calculator program
-
-Простое приложение для расчёта времени
-
 ## Скриншоты
 
 #### 1. На экране приложения необходимо создать заголовок «Электронная книга».
@@ -26,6 +22,7 @@
 
 Инструкции по установке проекта:
 
-1.
+1. Клонируйте репозиторий:
 ```bash
 git clone --branch=RelativeLayoutToggleButtonScrollView  https://github.com/PawPrintsInTheDark/AndroidLessons.git
+```
