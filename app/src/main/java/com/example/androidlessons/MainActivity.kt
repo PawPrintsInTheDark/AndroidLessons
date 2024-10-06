@@ -1,22 +1,21 @@
 package com.example.androidlessons
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var editText: EditText
-    private lateinit var resultTextView: TextView
-    private lateinit var characterCountTextView: TextView
-    private lateinit var button: Button
+
+    private lateinit var changeActivityBTN: Button
+    private lateinit var resultTV: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,21 +27,23 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        editText = findViewById(R.id.editTextED)
-        resultTextView = findViewById(R.id.textTV2)
-        characterCountTextView = findViewById(R.id.textTV3)
-        button = findViewById(R.id.buttonBTN)
 
-        onButtonClick(button)
+        changeActivityBTN = findViewById(R.id.changeActivityBTN)
+        resultTV = findViewById(R.id.resultTV)
+        changeActivityBTN.setOnClickListener {
+            val intent = Intent(this, SecondActivity::class.java)
+            getDataActivity.launch(intent)
+        }
     }
 
-    fun onButtonClick(view : View){
-        val inputText = editText.text.toString()
-        val reversedText = inputText.reversed()
-        resultTextView.text ="Результат:\n$reversedText"
-
-        val characterCount = inputText.replace(" ", "").length
-        characterCountTextView.text = "Количество символов: $characterCount"
+    @SuppressLint("SetTextI18n")
+    private val getDataActivity = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { res ->
+        if (res.resultCode == RESULT_OK){
+            val num = res.data!!.getStringExtra("result")
+            resultTV.text = "Результат: $num"
+        }
     }
 
 }
