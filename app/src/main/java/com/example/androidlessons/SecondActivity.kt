@@ -1,79 +1,66 @@
 package com.example.androidlessons
 
-import android.app.Activity
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class SecondActivity : AppCompatActivity() {
 
-    private lateinit var input1: EditText
-    private lateinit var input2: EditText
+    private lateinit var bmiResult: TextView
+    private lateinit var bmiImage: ImageView
+    private lateinit var recommendations: TextView
 
-    private var result = 0.0
-
+    @SuppressLint("DefaultLocale", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_second)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
-        input1 = findViewById(R.id.input1)
-        input2 = findViewById(R.id.input2)
+        bmiResult = findViewById(R.id.bmiResult)
+        bmiImage = findViewById(R.id.bmiImage)
+        recommendations = findViewById(R.id.recommendations)
 
-        val addButton: Button = findViewById(R.id.addButton)
-        val subtractButton: Button = findViewById(R.id.subtractButton)
-        val multiplyButton: Button = findViewById(R.id.multiplyButton)
-        val divideButton: Button = findViewById(R.id.divideButton)
-        val sendResultButton: Button = findViewById(R.id.sendResultButton)
+        val weight = intent.getDoubleExtra("weight", 0.0)
+            val height = intent.getDoubleExtra("height",0.0)
 
-        addButton.setOnClickListener { Calculate("+") }
-        subtractButton.setOnClickListener { Calculate("-") }
-        multiplyButton.setOnClickListener { Calculate("*") }
-        divideButton.setOnClickListener { Calculate("/") }
+        val bmi = weight / (height * height)
+        bmiResult.text = String.format("Индекс массы тела: %.2f", bmi)
 
-        sendResultButton.setOnClickListener {
-            if (result.isNaN()) return@setOnClickListener
-            val intent = Intent()
-            intent.putExtra("result", result.toString())
-            setResult(Activity.RESULT_OK, intent)
-            finish()
-        }
-
-    }
-
-    private fun Calculate(operation: String) {
-        val num1 = input1.text.toString().toDoubleOrNull()
-        val num2 = input2.text.toString().toDoubleOrNull()
-
-        if (num1 == null || num2 == null) {
-            Toast.makeText(this, "Пожалуйста, введите корректные числа", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        result = when (operation) {
-            "+" -> num1 + num2
-            "-" -> num1 - num2
-            "*" -> num1 * num2
-            "/" -> {
-                if (num2 == 0.0) {
-                    Toast.makeText(this, "Деление на ноль невозможно", Toast.LENGTH_SHORT).show()
-                    return
-                }
-                num1 / num2
+        when {
+            bmi < 18.5 -> {
+                bmiImage.setImageResource(R.drawable.thin)
+                recommendations.text ="""
+                    Вы худенький. 
+                    Рекомендуется:
+                    - Увеличить потребление калорий, добавив в рацион больше белков и углеводов.
+                    - Включить в меню орехи, авокадо, масла и молочные продукты.
+                    - Заниматься силовыми тренировками для наращивания мышечной массы.
+                    - Консультироваться с врачом или диетологом для составления индивидуального плана питания.
+                """.trimIndent()
             }
-
-            else -> Double.NaN
+            bmi in 18.5..24.9 -> {
+                bmiImage.setImageResource(R.drawable.slim)
+                recommendations.text = """
+                    У вас нормальный вес . 
+                    Рекомендуется:
+                    - Продолжать вести активный образ жизни.
+                    - Соблюдать сбалансированное питание, включая фрукты, овощи, белки и злаки.
+                    - Регулярно заниматься физической активностью, включая кардио и силовые тренировки.
+                    - Следить за уровнем стресса и достаточным количеством сна.
+                """.trimIndent()
+            }
+            bmi >= 25.0-> {
+                bmiImage.setImageResource(R.drawable.plump)
+                recommendations.text = """
+                    У вас избыточный вес. 
+                    Рекомендуется:
+                    - Уменьшить потребление калорий, особенно из сахара и жиров.
+                    - Включить в рацион больше овощей, фруктов и цельнозерновых продуктов.
+                    - Заниматься физической активностью не менее 150 минут в неделю.
+                    - Рассмотреть возможность консультации с врачом или диетологом для составления плана снижения веса.
+                """.trimIndent()
+            }
         }
     }
 }

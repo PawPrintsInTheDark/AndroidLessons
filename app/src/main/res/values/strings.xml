@@ -1,12 +1,7 @@
 <resources>
     <string name="app_name">AndroidLessons</string>
-    <string name="Сalculation_result">Результат:</string>
-    <string name="Сalculator">Калькулятор</string>
-    <string name="first_number">Первое число</string>
-    <string name="second_number">Второе число</string>
-    <string name="add">+</string>
-    <string name="sub">-</string>
-    <string name="mult">*</string>
-    <string name="div">/</string>
-    <string name="send_data">Передать данные</string>
+    <string name="weight">Введите ваш вес (кг)</string>
+    <string name="height">Введите ваш рост (см)</string>
+    <string name="calculate">Рассчитать</string>
+    <string name="bmiimg">bmiImg</string>
 </resources>

@@ -1,12 +1,10 @@
 package com.example.androidlessons
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -14,12 +12,12 @@ import androidx.core.view.WindowInsetsCompat
 class MainActivity : AppCompatActivity() {
 
 
-    private lateinit var changeActivityBTN: Button
-    private lateinit var resultTV: TextView
+    private lateinit var calculateBTN: Button
+    private lateinit var weightET: EditText
+    private lateinit var heightET: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -28,22 +26,25 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        changeActivityBTN = findViewById(R.id.changeActivityBTN)
-        resultTV = findViewById(R.id.resultTV)
-        changeActivityBTN.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
-            getDataActivity.launch(intent)
+        calculateBTN = findViewById(R.id.calculateButton)
+        weightET = findViewById(R.id.weightInput)
+        heightET = findViewById(R.id.heightInput)
+
+        calculateBTN.setOnClickListener {
+            val weight = weightET.text.toString().toDoubleOrNull()
+            val height = heightET.text.toString().toDoubleOrNull()?.div(100)
+
+            if (weight != null && height != null) {
+                val intent = Intent(this, SecondActivity::class.java)
+                intent.putExtra("weight", weight)
+                intent.putExtra("height", height)
+                startActivity(intent)
+            }else{
+                Toast.makeText(this, "Данные введены не верно! ", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    private val getDataActivity = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { res ->
-        if (res.resultCode == RESULT_OK){
-            val num = res.data!!.getStringExtra("result")
-            resultTV.text = "Результат: $num"
-        }
-    }
+
 
 }
