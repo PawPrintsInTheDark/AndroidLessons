@@ -39,5 +39,5 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone --branch=Intent  https://github.com/PawPrintsInTheDark/AndroidLessons.git
+git clone --branch=Lyfecycle  https://github.com/PawPrintsInTheDark/AndroidLessons.git
 ```
