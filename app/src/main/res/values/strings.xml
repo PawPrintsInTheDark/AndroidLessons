@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AndroidLessons</string>
-    <string name="weight">Введите ваш вес (кг)</string>
-    <string name="height">Введите ваш рост (см)</string>
-    <string name="calculate">Рассчитать</string>
-    <string name="bmiimg">bmiImg</string>
+    <string name="Save">Сохранить</string>
+    <string name="age">Введите возраст</string>
+    <string name="name">Введите имя</string>
+    <string name="exit">Exit</string>
 </resources>
