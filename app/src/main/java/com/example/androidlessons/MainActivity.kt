@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 Toast.makeText(this, "Пользователь \"${userList[position].name}\" удалён", Toast.LENGTH_SHORT).show()
                 userList.removeAt(position)
-                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged()
             }
     }
 
