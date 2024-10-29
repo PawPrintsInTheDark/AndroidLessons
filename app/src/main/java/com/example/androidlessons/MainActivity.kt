@@ -13,11 +13,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Removable {
+
+    private var adapter : ArrayAdapter<User>? = null
 
     private val userList: MutableList<User> = mutableListOf<User>()
     private lateinit var saveBTN: Button
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         listviewLV = findViewById(R.id.listViewLV)
 
         // Код для смены цвета текста у ListView
-        val adapter =
+        adapter =
             object : ArrayAdapter<User>(this, android.R.layout.simple_list_item_1, userList) {
                 override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                     val view = super.getView(position, convertView, parent)
@@ -58,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             val age = ageET.text.toString()
             if (name.isNotEmpty() && age.isNotEmpty()) {
                 userList.add(User(name, age.toInt()))
-                adapter.notifyDataSetChanged()
+                adapter!!.notifyDataSetChanged()
                 nameET.text.clear()
                 ageET.text.clear()
             }
@@ -66,9 +67,11 @@ class MainActivity : AppCompatActivity() {
 
         listviewLV.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                Toast.makeText(this, "Пользователь \"${userList[position].name}\" удалён", Toast.LENGTH_SHORT).show()
-                userList.removeAt(position)
-                adapter.notifyDataSetChanged()
+                val dialog = MyDialog()
+                val args = Bundle()
+                args.putParcelable("user", userList[position])
+                dialog.arguments = args
+                dialog.show(supportFragmentManager, "custom")
             }
     }
 
@@ -83,6 +86,10 @@ class MainActivity : AppCompatActivity() {
             R.id.exitMenuMain -> finish()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun remove(user: User) {
+        adapter?.remove(user)
     }
 
 
