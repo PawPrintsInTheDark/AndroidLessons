@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">AndroidLessons</string>
-    <string name="Save">Сохранить</string>
-    <string name="age">Введите возраст</string>
-    <string name="name">Введите имя</string>
-    <string name="exit">Exit</string>
+    <string name="app_name">Я историк</string>
+    <string name="start">Начать</string>
+    <string name="reset">Начать заново</string>
 </resources>
