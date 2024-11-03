@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F1F8E9"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/firstNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Имя"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="#FF6F61"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-medium" />
+
+    <TextView
+        android:id="@+id/lastNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Фамилия"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="#6A1B9A"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-medium" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#BDBDBD"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/addressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Адрес"
+        android:textSize="20sp"
+        android:textColor="#1E88E5"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif" />
+
+    <TextView
+        android:id="@+id/phoneTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Телефон"
+        android:textSize="20sp"
+        android:textColor="#1E88E5"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif" />
+
+</LinearLayout>

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#F1F8E9"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:background="@color/color3"
-        tools:ignore="MissingConstraints" />
+        android:background="#1E88E5" />
 
     <EditText
         android:id="@+id/NametInput"
@@ -25,46 +24,60 @@
         android:hint="@string/name"
         android:inputType="textAutoComplete"
         android:padding="16dp"
-        android:textColorHint="#A39D6010"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3"
-        tools:ignore="MissingConstraints" />
+        android:textColorHint="#FF6F61"
+        android:textColor="#1A1A1D"
+        android:layout_margin="10dp"/>
 
     <EditText
         android:id="@+id/AgeInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:hint="@string/age"
-        android:inputType="numberDecimal"
+        android:hint="@string/lastname"
+        android:inputType="textAutoCorrect"
         android:padding="16dp"
-        android:textColorHint="#A39D6010"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NametInput"
-        app:layout_constraintVertical_bias="0.05"
-        tools:ignore="MissingConstraints" />
+        android:textColorHint="#FF6F61"
+        android:textColor="#1A1A1D"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/addressInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="@string/address"
+        android:inputType="textAutoComplete"
+        android:padding="16dp"
+        android:textColorHint="#FF6F61"
+        android:textColor="#1A1A1D"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/numberInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:hint="@string/number"
+        android:inputType="textAutoCorrect"
+        android:padding="16dp"
+        android:textColor="#1A1A1D"
+        android:textColorHint="#FF6F61" />
 
     <Button
         android:id="@+id/SaveButton"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:backgroundTint="#DE7A61"
+        android:backgroundTint="#FF6F61"
         android:padding="16dp"
         android:text="@string/Save"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AgeInput"
-        tools:ignore="MissingConstraints" />
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="16dp" />
 
     <ListView
         android:id="@+id/listViewLV"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 

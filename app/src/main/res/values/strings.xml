@@ -4,4 +4,7 @@
     <string name="age">Введите возраст</string>
     <string name="name">Введите имя</string>
     <string name="exit">Exit</string>
+    <string name="number">Введите номер</string>
+    <string name="address">Введите адрес</string>
+    <string name="lastname">Введите фамилию</string>
 </resources>
