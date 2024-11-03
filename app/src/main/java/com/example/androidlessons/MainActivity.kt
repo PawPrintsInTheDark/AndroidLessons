@@ -15,11 +15,12 @@ import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 
 
 class MainActivity : AppCompatActivity() {
 
-    private val userList: MutableList<User> = mutableListOf<User>()
+    private lateinit var userViewModel: UserViewModel
     private lateinit var saveBTN: Button
     private lateinit var nameET: EditText
     private lateinit var ageET: EditText
@@ -41,9 +42,12 @@ class MainActivity : AppCompatActivity() {
         ageET = findViewById(R.id.AgeInput)
         listviewLV = findViewById(R.id.listViewLV)
 
+        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+
         // Код для смены цвета текста у ListView
         val adapter =
-            object : ArrayAdapter<User>(this, android.R.layout.simple_list_item_1, userList) {
+            object :
+                ArrayAdapter<User>(this, android.R.layout.simple_list_item_1, mutableListOf()) {
                 override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                     val view = super.getView(position, convertView, parent)
                     val tv = view.findViewById<View>(android.R.id.text1) as TextView
@@ -53,22 +57,32 @@ class MainActivity : AppCompatActivity() {
             }
         listviewLV.adapter = adapter
 
+        userViewModel.currentUsers.observe(this) {
+            adapter.clear()
+            adapter.addAll(it)
+            adapter.notifyDataSetChanged()
+        }
+
+
         saveBTN.setOnClickListener {
             val name = nameET.text.toString()
             val age = ageET.text.toString()
             if (name.isNotEmpty() && age.isNotEmpty()) {
-                userList.add(User(name, age.toInt()))
-                adapter.notifyDataSetChanged()
+                userViewModel.addUser(User(name, age.toInt()))
                 nameET.text.clear()
                 ageET.text.clear()
+
             }
         }
 
         listviewLV.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                Toast.makeText(this, "Пользователь \"${userList[position].name}\" удалён", Toast.LENGTH_SHORT).show()
-                userList.removeAt(position)
-                adapter.notifyDataSetChanged()
+                Toast.makeText(
+                    this,
+                    "Пользователь \"${userViewModel.currentUsers.value?.get(position)?.name}\" удалён",
+                    Toast.LENGTH_SHORT
+                ).show()
+                userViewModel.removeUser(position)
             }
     }
 
