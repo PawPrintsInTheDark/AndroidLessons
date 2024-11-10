@@ -1,71 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarMain"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:background="@color/color3"
-        tools:ignore="MissingConstraints" />
+        android:background="#6750A3" />
 
     <EditText
-        android:id="@+id/NametInput"
+        android:id="@+id/editTextET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:hint="@string/name"
-        android:inputType="textAutoComplete"
-        android:padding="16dp"
-        android:textColorHint="#A39D6010"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3"
-        tools:ignore="MissingConstraints" />
+        android:layout_below="@id/toolbar"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:enabled="false"
+        android:hint="@string/input"
+        android:padding="10dp"
+        android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/AgeInput"
+    <TextView
+        android:id="@+id/textViewResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/editTextET"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:hint="@string/age"
-        android:inputType="numberDecimal"
         android:padding="16dp"
-        android:textColorHint="#A39D6010"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NametInput"
-        app:layout_constraintVertical_bias="0.05"
-        tools:ignore="MissingConstraints" />
+        android:text="@string/result"
+        android:textColor="#A8A4A8"
+        android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/SaveButton"
-
-        android:layout_width="wrap_content"
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:backgroundTint="#DE7A61"
-        android:padding="16dp"
-        android:text="@string/Save"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AgeInput"
-        tools:ignore="MissingConstraints" />
+        android:layout_below="@id/textViewResult"
+        android:columnCount="4"
+        android:rowCount="7"
+        android:layout_margin="20dp">
 
-    <ListView
-        android:id="@+id/listViewLV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        <!-- Кнопки калькулятора -->
+        <Button
+            android:layout_row="0"
+            android:layout_column="3"
+            android:text="/" />
 
-</LinearLayout>
+        <Button android:text="1" />
+
+        <Button android:text="2" />
+
+        <Button android:text="3" />
+
+        <Button android:text="*" />
+
+
+        <Button android:text="4" />
+
+        <Button android:text="5" />
+
+        <Button android:text="6" />
+
+        <Button android:text="-" />
+
+
+        <Button android:text="7" />
+
+        <Button android:text="8" />
+
+        <Button android:text="9" />
+
+        <Button
+            android:layout_height="150dp"
+
+            android:layout_rowSpan="3"
+            android:text="+" />
+
+
+        <Button
+            android:layout_width="175dp"
+
+            android:layout_columnSpan="3"
+            android:text="0" />
+
+
+        <Button
+            android:layout_width="264dp"
+
+            android:layout_columnSpan="3"
+            android:text="=" />
+
+        <Button
+            android:layout_width="355dp"
+
+            android:layout_columnSpan="4"
+            android:text="reset" />
+
+    </GridLayout>
+
+</RelativeLayout>

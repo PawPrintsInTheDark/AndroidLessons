@@ -5,87 +5,94 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ListView
+import android.widget.GridLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
+import net.objecthunter.exp4j.ExpressionBuilder
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var userViewModel: UserViewModel
-    private lateinit var saveBTN: Button
-    private lateinit var nameET: EditText
-    private lateinit var ageET: EditText
-    private lateinit var listviewLV: ListView
-    private lateinit var toolbarMain: androidx.appcompat.widget.Toolbar
+    private lateinit var editTextET: EditText
+    private lateinit var textViewResult: TextView
+    private lateinit var gridLayout: GridLayout
 
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "UseSupportActionBar")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbarMain = findViewById(R.id.toolbarMain)
-        setSupportActionBar(toolbarMain)
-        title = "Каталог пользователей"
-
-        saveBTN = findViewById(R.id.SaveButton)
-        nameET = findViewById(R.id.NametInput)
-        ageET = findViewById(R.id.AgeInput)
-        listviewLV = findViewById(R.id.listViewLV)
-
-        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
-
-        // Код для смены цвета текста у ListView
-        val adapter =
-            object :
-                ArrayAdapter<User>(this, android.R.layout.simple_list_item_1, mutableListOf()) {
-                override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-                    val view = super.getView(position, convertView, parent)
-                    val tv = view.findViewById<View>(android.R.id.text1) as TextView
-                    tv.setTextColor(Color.BLACK)
-                    return view
-                }
-            }
-        listviewLV.adapter = adapter
-
-        userViewModel.currentUsers.observe(this) {
-            adapter.clear()
-            adapter.addAll(it)
-            adapter.notifyDataSetChanged()
-        }
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        title = "Калькулятор"
+        toolbar.setTitleTextColor(Color.WHITE)
 
 
-        saveBTN.setOnClickListener {
-            val name = nameET.text.toString()
-            val age = ageET.text.toString()
-            if (name.isNotEmpty() && age.isNotEmpty()) {
-                userViewModel.addUser(User(name, age.toInt()))
-                nameET.text.clear()
-                ageET.text.clear()
+        editTextET = findViewById(R.id.editTextET)
+        textViewResult = findViewById(R.id.textViewResult)
 
-            }
-        }
+        // Настройка кнопок
+        setupButtons()
 
-        listviewLV.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ ->
-                Toast.makeText(
-                    this,
-                    "Пользователь \"${userViewModel.currentUsers.value?.get(position)?.name}\" удалён",
-                    Toast.LENGTH_SHORT
-                ).show()
-                userViewModel.removeUser(position)
-            }
     }
 
+    private fun setupButtons() {
+        gridLayout= findViewById(R.id.gridLayout)
+
+        for (i in 0 until gridLayout.childCount) {
+            val button = gridLayout.getChildAt(i) as Button
+            button.setOnClickListener {
+                when (button.text) {
+                    "=" -> calculateResult()
+                    "reset" -> clearInput()
+                    else -> appendToInput(button.text.toString())
+                }
+            }
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun appendToInput(value: String) {
+        val currentInput = editTextET.text.toString()
+
+        // Проверяем, является ли последний введённый символ операцией
+        if (isOperator(value) && (currentInput.isEmpty() || isOperator(currentInput.last().toString()))) {
+            return
+        }
+
+        editTextET.setText(currentInput + value)
+    }
+
+    private fun isOperator(value: String): Boolean {
+        return value == "+" || value == "-" || value == "*" || value == "/"
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    private fun clearInput() {
+        editTextET.setText("")
+        textViewResult.text = "result"
+    }
+
+    private fun calculateResult() {
+        val input = editTextET.text.toString()
+        try {
+            val result = evaluateExpression(input)
+            textViewResult.text = result.toString()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Ошибка в выражении", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun evaluateExpression(expression: String): Double {
+        val parser = ExpressionBuilder(expression).build()
+        return parser.evaluate()
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -93,11 +100,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.exitMenuMain -> finish()
-        }
+        finish()
         return super.onOptionsItemSelected(item)
     }
-
-
 }
