@@ -3,7 +3,11 @@
     <string name="Save">Сохранить</string>
     <string name="age">Введите возраст</string>
     <string name="name">Введите имя</string>
-    <string name="exit">Exit</string>
+    <string name="exit">Выход</string>
     <string name="input">input</string>
     <string name="result">result</string>
+    <string name="start_view">Начать просмотр</string>
+    <string name="welcome_label">Вас приветствует альбом любимых фотографий</string>
+    <string name="next_pictures">Следующее фото</string>
+    <string name="finish_label">Спасибо за просмотр! \n До свидания</string>
 </resources>
