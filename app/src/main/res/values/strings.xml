@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">AndroidLessons</string>
-    <string name="Save">Сохранить</string>
     <string name="age">Введите возраст</string>
     <string name="name">Введите имя</string>
     <string name="exit">Exit</string>
+    <string name="shop">Магазин продуктов</string>
+    <string name="create_store">Создать магазин</string>
+    <string name="add">Добавить</string>
+    <string name="name_product">Название продукта</string>
+    <string name="cost_product">Цена продукта</string>
 </resources>
