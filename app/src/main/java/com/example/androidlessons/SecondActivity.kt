@@ -2,35 +2,29 @@ package com.example.androidlessons
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
 class SecondActivity : AppCompatActivity() {
 
-    private var products : MutableList<Product> = mutableListOf()
+    private var products: MutableList<Product> = mutableListOf()
 
     private lateinit var listviewLV: ListView
     private lateinit var addBTN: Button
     private lateinit var nameET: EditText
     private lateinit var costET: EditText
+    private lateinit var descriptionET: EditText
     private lateinit var imgIV: ImageView
     private val GALLERY_REQUEST = 290
-    private var selectedImg : Uri? = null
+    private var selectedImg: Uri? = null
 
 
     private lateinit var toolbarMain: androidx.appcompat.widget.Toolbar
@@ -52,22 +46,33 @@ class SecondActivity : AppCompatActivity() {
             startActivityForResult(photoPickerIntent, GALLERY_REQUEST)
         }
 
-        addBTN.setOnClickListener{
+        addBTN.setOnClickListener {
             createProduct()
-
             val listAdapter = ListAdapter(this@SecondActivity, products)
             listviewLV.adapter = listAdapter
             listAdapter.notifyDataSetChanged()
 
             resetEditFields()
+            selectedImg = null
         }
+
+        listviewLV.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                val product = listviewLV.adapter.getItem(position) as? Product
+                val intent = Intent(this, DetailsActivity::class.java)
+                intent.putExtra("product", product)
+
+                startActivity(intent).also { finish() }
+            }
     }
+
 
     private fun createProduct() {
         val productName = nameET.text.toString()
-        val productCost = costET.text.toString() + " руб."
-        val productImg = selectedImg
-        val product = Product(productName, productCost, productImg)
+        val productCost = if (costET.text.toString().isEmpty()) " " else costET.text.toString() + " руб."
+        val productImg = selectedImg.toString()
+        val description = descriptionET.text.toString()
+        val product = Product(productName, productCost, productImg, description)
         products.add(product)
     }
 
@@ -81,6 +86,7 @@ class SecondActivity : AppCompatActivity() {
         addBTN = findViewById(R.id.addBTN)
         nameET = findViewById(R.id.nameET)
         costET = findViewById(R.id.costET)
+        descriptionET = findViewById(R.id.descriptionET)
         listviewLV = findViewById(R.id.listViewLV)
         imgIV = findViewById(R.id.editImageIV)
         toolbarMain = findViewById(R.id.toolbarMain)
@@ -90,11 +96,12 @@ class SecondActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         imgIV = findViewById(R.id.editImageIV)
-        if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK){
+        if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK) {
             selectedImg = data?.data
             imgIV.setImageURI(selectedImg)
         }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
