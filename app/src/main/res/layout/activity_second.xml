@@ -61,7 +61,7 @@
                 android:id="@+id/descriptionET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/name_product"
+                android:hint="@string/description"
                 android:textColor="#6D676D"
                 android:textColorHint="#4D000000"
                 android:textSize="20sp"

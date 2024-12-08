@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class SecondActivity : AppCompatActivity() {
@@ -23,8 +24,12 @@ class SecondActivity : AppCompatActivity() {
     private lateinit var costET: EditText
     private lateinit var descriptionET: EditText
     private lateinit var imgIV: ImageView
+
+    private var listAdapter: ListAdapter? = null
+    var selectedImg: Uri? = null
+    private var check = true
+    private var item: Int? = null
     private val GALLERY_REQUEST = 290
-    private var selectedImg: Uri? = null
 
 
     private lateinit var toolbarMain: androidx.appcompat.widget.Toolbar
@@ -48,9 +53,9 @@ class SecondActivity : AppCompatActivity() {
 
         addBTN.setOnClickListener {
             createProduct()
-            val listAdapter = ListAdapter(this@SecondActivity, products)
+            listAdapter = ListAdapter(this@SecondActivity, products)
             listviewLV.adapter = listAdapter
-            listAdapter.notifyDataSetChanged()
+            listAdapter!!.notifyDataSetChanged()
 
             resetEditFields()
             selectedImg = null
@@ -59,17 +64,33 @@ class SecondActivity : AppCompatActivity() {
         listviewLV.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 val product = listviewLV.adapter.getItem(position) as? Product
+                item = position
                 val intent = Intent(this, DetailsActivity::class.java)
                 intent.putExtra("product", product)
+                intent.putExtra("products", products as ArrayList<Product>)
+                intent.putExtra("item", item)
+                intent.putExtra("check", check)
 
-                startActivity(intent).also { finish() }
+                startActivity(intent)
             }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        check = intent.extras?.getBoolean("newCheck") ?: true
+        if(!check){
+            products = intent.getSerializableExtra("list") as MutableList<Product>
+            listAdapter = ListAdapter(this,products)
+            check = true
+        }
+        listviewLV.adapter = listAdapter
     }
 
 
     private fun createProduct() {
         val productName = nameET.text.toString()
-        val productCost = if (costET.text.toString().isEmpty()) " " else costET.text.toString() + " руб."
+        val productCost =
+            if (costET.text.toString().isEmpty()) " " else costET.text.toString() + " руб."
         val productImg = selectedImg.toString()
         val description = descriptionET.text.toString()
         val product = Product(productName, productCost, productImg, description)
@@ -79,6 +100,7 @@ class SecondActivity : AppCompatActivity() {
     private fun resetEditFields() {
         nameET.text.clear()
         costET.text.clear()
+        descriptionET.text.clear()
         imgIV.setImageResource(R.drawable.ic_image)
     }
 
@@ -103,13 +125,15 @@ class SecondActivity : AppCompatActivity() {
     }
 
 
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        finish()
+        Toast.makeText(this, "Программа завершена", Toast.LENGTH_SHORT).show()
+        finishAffinity()
         return super.onOptionsItemSelected(item)
     }
 

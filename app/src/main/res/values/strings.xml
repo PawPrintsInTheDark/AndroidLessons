@@ -9,4 +9,9 @@
     <string name="name_product">Название продукта</string>
     <string name="cost_product">Цена продукта</string>
     <string name="description">Краткое описание</string>
+    <string name="back">Back</string>
+    <string name="save">Сохранить</string>
+    <string name="product_name">Название продукта</string>
+    <string name="product_cost">Цена продукта</string>
+    <string name="product_description">Описание продукта</string>
 </resources>
