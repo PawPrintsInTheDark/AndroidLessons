@@ -54,12 +54,13 @@ class DetailsActivity : AppCompatActivity() {
         costET.setText(product.cost)
         descriptionET.setText(product.description)
         imgIV.setImageURI(Uri.parse(product.image))
+        selectedImg = Uri.parse(product.image)
 
         saveBTN.setOnClickListener {
             val product = Product(
                 nameET.text.toString(),
                 costET.text.toString(),
-                product.image,
+                selectedImg.toString(),
                 descriptionET.text.toString()
             )
             val list = products as MutableList<Product>
