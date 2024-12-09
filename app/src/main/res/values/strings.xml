@@ -1,8 +1,4 @@
 <resources>
     <string name="app_name">AndroidLessons</string>
-    <string name="my_text">Результат</string>
-    <string name="my_text2">Количество символов</string>
-    <string name="button_text">Преобразовать</string>
-    <string name="editText">Сюда писать буковки</string>
-    <string name="my_text3">Все наоборот</string>
+
 </resources>
