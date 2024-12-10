@@ -39,8 +39,8 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/imageViewIV"
+        <ImageView
+            android:id="@+id/imageViewMainIV"
             android:layout_width="match_parent"
             android:layout_height="342dp"
             android:layout_marginTop="16dp"

@@ -2,18 +2,20 @@ package com.example.androidlessons
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-    val exercises = ExerciseDataBase.exercises
+    private val exercises = ExerciseDataBase.exercises
 
     private lateinit var exerciseMainTV : TextView
     private lateinit var sloganTV: TextView
     private lateinit var goExerciseButtonBTN: Button
-    private lateinit var imageViewIV: ImageView
+    private lateinit var imageViewMainIV: ImageView
 
 
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
@@ -36,10 +38,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        exerciseMainTV = findViewById(R.id.exerciseTV)
-        sloganTV = findViewById(R.id.timerTV)
-        goExerciseButtonBTN = findViewById(R.id.startButtonBTN)
-        imageViewIV = findViewById(R.id.imageViewIV)
+        exerciseMainTV = findViewById(R.id.exerciseMainTV)
+        sloganTV = findViewById(R.id.sloganTV)
+        goExerciseButtonBTN = findViewById(R.id.goExerciseButtonBTN)
+        imageViewMainIV = findViewById(R.id.imageViewMainIV)
         toolbar = findViewById(R.id.toolbarMain)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        finishAffinity()
+        return super.onOptionsItemSelected(item)
     }
 }

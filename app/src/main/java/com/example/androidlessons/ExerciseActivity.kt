@@ -1,7 +1,10 @@
 package com.example.androidlessons
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -12,7 +15,7 @@ class ExerciseActivity : AppCompatActivity() {
 
     val exercises = ExerciseDataBase.exercises
 
-//    private lateinit var titleTV: TextView
+    private lateinit var titleTV: TextView
     private lateinit var exerciseTV : TextView
     private lateinit var descriptionTV: TextView
     private lateinit var timerTV: TextView
@@ -46,7 +49,7 @@ class ExerciseActivity : AppCompatActivity() {
     }
 
     private fun init() {
-//        titleTV = findViewById(R.id.titleTV)
+        titleTV = findViewById(R.id.titleTV)
         exerciseTV = findViewById(R.id.exerciseTV)
         descriptionTV = findViewById(R.id.descriptionTV)
         timerTV = findViewById(R.id.timerTV)
@@ -64,7 +67,7 @@ class ExerciseActivity : AppCompatActivity() {
 
     private fun startWork() {
         exerciseIndex = 0
-//        titleTV.text = "Начало тренировки"
+        titleTV.text = "Начало тренировки"
         startButtonBTN.isEnabled = false
         startButtonBTN.text = "Процесс тренировки"
         startNextExercise()
@@ -100,9 +103,20 @@ class ExerciseActivity : AppCompatActivity() {
          }
     }
 
+    @SuppressLint("DefaultLocale")
     private fun formatTime(seconds: Int): String {
         val minutes = seconds / 60
         val remainingSeconds = seconds % 60
         return String.format("%02d:%02d", minutes, remainingSeconds)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        finishAffinity()
+        return super.onOptionsItemSelected(item)
     }
 }
