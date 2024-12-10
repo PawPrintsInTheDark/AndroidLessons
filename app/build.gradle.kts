@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.19")
     implementation(libs.circleimageview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
