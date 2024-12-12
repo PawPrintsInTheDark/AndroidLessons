@@ -16,29 +16,100 @@
         android:background="#FF8A80"
         tools:ignore="MissingConstraints" />
 
-
-    <TextView
-        android:id="@+id/setAlarmTV"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="24sp"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/alertButtonBTN"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarMain" />
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarMain"
+        tools:layout_editor_absoluteX="32dp">
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:layout_weight="6"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/nameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Имя"
+                android:textColor="#6D676D"
+                android:textColorHint="#4D000000"
+                android:textSize="20sp"
+                tools:ignore="Autofill,TextFields" />
+
+            <EditText
+                android:id="@+id/secondNameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Фамилия"
+                android:textColor="#6D676D"
+                android:textColorHint="#4D000000"
+                android:textSize="20sp"
+                tools:ignore="Autofill,TextFields" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="8dp"
+            android:layout_weight="6"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/ageET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Возраст"
+                android:inputType="number"
+                android:textColor="#6D676D"
+                android:textColorHint="#4D000000"
+                android:textSize="20sp"
+                tools:ignore="Autofill,TextFields" />
+
+            <Spinner
+                android:id="@+id/postSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:hint="Должность"
+                android:inputType="numberDecimal"
+                android:textColor="#6D676D"
+                android:textColorHint="#4D000000"
+                android:textSize="20sp"
+                tools:ignore="Autofill,TextFields" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/alertButtonBTN"
-        android:backgroundTint="@color/btn_color"
-        android:layout_width="wrap_content"
+        android:id="@+id/addBTN"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Установить будильник!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarMain" />
+        android:layout_marginHorizontal="30dp"
+        android:text="Добавить"
+        android:textColor="@color/black"
+        android:backgroundTint="#F4D586"
+        android:textSize="22sp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:layout_editor_absoluteX="30dp" />
+
+    <ListView
+        android:id="@+id/listViewLV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/addBTN"
+        tools:ignore="MissingConstraints"
+        tools:listitem="@layout/employee_item" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
