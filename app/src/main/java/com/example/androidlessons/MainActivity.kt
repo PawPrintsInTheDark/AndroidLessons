@@ -1,47 +1,102 @@
 package com.example.androidlessons
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.AdapterView
-import android.widget.GridView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-@Suppress(" CAST_NEVER_SUCCEEDS")
 class MainActivity : AppCompatActivity() {
+
+    private val db = DBHelper(this, null)
+
+    private var products = mutableListOf<Product>()
+    private var listAdapter: ListAdapter? = null
+
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    private lateinit var addBTN: Button
+    private lateinit var nameET: EditText
+    private lateinit var weightET: EditText
+    private lateinit var costET: EditText
+    private lateinit var listViewLV: ListView
 
-    private lateinit var gridViewMainGV: GridView
-    private var list = mutableListOf(
-        GridViewModal("Youtube", R.drawable.youtube_icon, "https://www.youtube.com"),
-        GridViewModal("Instagram", R.drawable.instagram_icon,"https://www.instagram.com"),
-        GridViewModal("Google", R.drawable.google_icon,"https://www.google.com"),
-        GridViewModal("Яндекс", R.drawable.yandex,"https://www.ya.ru"),
-    )
-
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "Range")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar = findViewById(R.id.toolbarMain)
-        gridViewMainGV = findViewById(R.id.gridViewMainGV)
+        init()
 
-        toolbar.title = "Мобильный браузер"
-        setSupportActionBar(toolbar)
+        addBTN.setOnClickListener {
+            products.clear()
+            listAdapter = ListAdapter(this@MainActivity, products)
+            listViewLV.adapter = listAdapter
 
-        val adapter = GridViewAdapter(list,this@MainActivity)
-        gridViewMainGV.adapter = adapter
+            var name = nameET.text.toString()
+            var weight = weightET.text.toString()
+            var cost = costET.text.toString()
 
-        gridViewMainGV.onItemClickListener = AdapterView.OnItemClickListener{
-            _,_,position,_ ->
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(list[position].src)))
+            db.addName(name, weight, cost)
+            Toast.makeText(
+                this,
+                "$name, $weight, $cost добавлены в базу данных",
+                Toast.LENGTH_SHORT
+            ).show()
+            clearFields()
+
+            val cursor = db.getInfo()
+            if (cursor != null && cursor.moveToFirst()) {
+                cursor.moveToFirst()
+                name = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_NAME))
+                weight = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_WEIGHT))
+                cost = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_COST))
+                createProduct(name, weight, cost)
+            }
+            while (cursor!!.moveToNext()) {
+                name = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_NAME))
+                weight = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_WEIGHT))
+                cost = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_COST))
+                createProduct(name, weight, cost) }
+            cursor.close()
+
+            listAdapter!!.notifyDataSetChanged()
         }
 
+        listViewLV.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                products.clear()
+                db.removeALL()
+                listAdapter?.notifyDataSetChanged()
+            }
 
+
+    }
+
+    private fun createProduct(name: String, weight: String, cost: String) {
+        products.add(Product(name, weight, cost))
+    }
+
+    private fun clearFields() {
+        nameET.text.clear()
+        weightET.text.clear()
+        costET.text.clear()
+    }
+
+    private fun init() {
+        toolbar = findViewById(R.id.toolbarMain)
+        addBTN = findViewById(R.id.addBTN)
+        nameET = findViewById(R.id.enterNameET)
+        weightET = findViewById(R.id.enterWeightET)
+        costET = findViewById(R.id.enterCostET)
+        listViewLV = findViewById(R.id.listViewLV)
+
+        toolbar.title = "SQLite"
+        setSupportActionBar(toolbar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

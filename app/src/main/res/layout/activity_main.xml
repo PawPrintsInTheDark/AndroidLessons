@@ -16,13 +16,44 @@
         android:background="#FF8A80"
         tools:ignore="MissingConstraints" />
 
-    <GridView
-        android:id="@+id/gridViewMainGV"
+    <EditText
+        android:id="@+id/enterNameET"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:horizontalSpacing="6dp"
-        android:numColumns="2"
-        android:verticalSpacing="6dp"
-        />
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"
+        android:hint="Введите продукт"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/enterWeightET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"
+        android:hint="Введите вес"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/enterCostET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"
+        android:hint="Введите цену"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/addBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Сохранить"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="10dp" />
+
+    <ListView
+        android:id="@+id/listViewLV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
