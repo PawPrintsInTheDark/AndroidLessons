@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             var weight = weightET.text.toString()
             var cost = costET.text.toString()
 
-            db.addName(name, weight, cost)
+            db.addProduct(Product())
             Toast.makeText(
                 this,
                 "$name, $weight, $cost добавлены в базу данных",
@@ -49,20 +49,6 @@ class MainActivity : AppCompatActivity() {
             ).show()
             clearFields()
 
-            val cursor = db.getInfo()
-            if (cursor != null && cursor.moveToFirst()) {
-                cursor.moveToFirst()
-                name = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_NAME))
-                weight = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_WEIGHT))
-                cost = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_COST))
-                createProduct(name, weight, cost)
-            }
-            while (cursor!!.moveToNext()) {
-                name = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_NAME))
-                weight = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_WEIGHT))
-                cost = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_COST))
-                createProduct(name, weight, cost) }
-            cursor.close()
 
             listAdapter!!.notifyDataSetChanged()
         }

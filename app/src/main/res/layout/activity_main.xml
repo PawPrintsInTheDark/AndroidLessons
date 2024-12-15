@@ -42,14 +42,38 @@
         android:layout_marginTop="5dp"
         android:hint="Введите цену"
         android:textSize="18sp" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <Button
         android:id="@+id/addBTN"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Сохранить"
-        android:layout_marginHorizontal="25dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="5dp"
         android:layout_marginVertical="10dp" />
+
+    <Button
+        android:id="@+id/editBTN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Изменить"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginVertical="10dp" />
+
+    <Button
+        android:id="@+id/deleteBTN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Удалить"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginVertical="10dp" />
+</LinearLayout>
 
     <ListView
         android:id="@+id/listViewLV"
