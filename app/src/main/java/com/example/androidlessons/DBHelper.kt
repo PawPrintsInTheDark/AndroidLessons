@@ -11,21 +11,21 @@ class DBHelper(
 ) : SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
 
     companion object {
-        private val DATABASE_NAME = "PRODUCT_DATABASE"
+        private val DATABASE_NAME = "PERSON_DATABASE"
         private val DATABASE_VERSION = 1
-        val TABLE_NAME = "product_table"
+        val TABLE_NAME = "person_table"
         val KEY_ID = "id"
         val KEY_NAME = "name"
-        val KEY_WEIGHT = "weight"
-        val KEY_COST = "cost"
+        val KEY_PHONE = "phone"
+        val KEY_POST = "post"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
         val query = ("CREATE TABLE " + TABLE_NAME + " (" +
                 KEY_ID+ " INTEGER PRIMARY KEY, " +
                 KEY_NAME + " TEXT, " +
-                KEY_WEIGHT + " TEXT, " +
-                KEY_COST + " TEXT" + ")")
+                KEY_PHONE + " TEXT, " +
+                KEY_POST + " TEXT" + ")")
         db.execSQL(query)
     }
 
@@ -33,11 +33,11 @@ class DBHelper(
         db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
     }
 
-    fun addName(name: String, weight: String, cost: String) {
+    fun addPerson(name: String, phone: String, post: String) {
         val values = ContentValues()
         values.put(KEY_NAME, name)
-        values.put(KEY_WEIGHT, weight)
-        values.put(KEY_COST, cost)
+        values.put(KEY_PHONE, phone)
+        values.put(KEY_POST, post)
         val db = this.writableDatabase
         db.insert(TABLE_NAME, null, values)
         db.close()
