@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.AdapterView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -19,7 +19,9 @@ class MainActivity : AppCompatActivity() {
     private var listAdapter: ListAdapter? = null
 
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
-    private lateinit var addBTN: Button
+    private lateinit var saveBTN: Button
+    private lateinit var updateBTN: Button
+    private lateinit var deleteBTN: Button
     private lateinit var nameET: EditText
     private lateinit var weightET: EditText
     private lateinit var costET: EditText
@@ -32,39 +34,44 @@ class MainActivity : AppCompatActivity() {
 
         init()
 
-        addBTN.setOnClickListener {
-            products.clear()
-            listAdapter = ListAdapter(this@MainActivity, products)
-            listViewLV.adapter = listAdapter
-
-            var name = nameET.text.toString()
-            var weight = weightET.text.toString()
-            var cost = costET.text.toString()
-
-            db.addProduct(Product())
-            Toast.makeText(
-                this,
-                "$name, $weight, $cost добавлены в базу данных",
-                Toast.LENGTH_SHORT
-            ).show()
-            clearFields()
-
-
-            listAdapter!!.notifyDataSetChanged()
+        saveBTN.setOnClickListener {
+            saveRecords()
         }
-
-        listViewLV.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ ->
-                products.clear()
-                db.removeALL()
-                listAdapter?.notifyDataSetChanged()
-            }
-
 
     }
 
-    private fun createProduct(name: String, weight: String, cost: String) {
-        products.add(Product(name, weight, cost))
+    override fun onResume() {
+        super.onResume()
+        updateBTN.setOnClickListener {
+            updateRecord()
+        }
+        deleteBTN.setOnClickListener {
+            deleteRecord()
+        }
+    }
+
+
+
+    private fun viewDataAdapter() {
+        products = db.readProducts()
+        listAdapter = ListAdapter(this, products)
+        listViewLV.adapter = listAdapter
+        listAdapter?.notifyDataSetChanged()
+    }
+
+    private fun saveRecords() {
+        val name = nameET.text.toString()
+        val weight = weightET.text.toString()
+        val cost = costET.text.toString()
+        if (name.trim() != "" && weight.trim() != "" && cost.trim() != "") {
+            val product = Product(name, weight, cost)
+            products.add(product)
+            db.addProduct(product)
+            Toast.makeText(this, "Запись добавлена", Toast.LENGTH_SHORT).show()
+            clearFields()
+            viewDataAdapter()
+        }
+
     }
 
     private fun clearFields() {
@@ -75,7 +82,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         toolbar = findViewById(R.id.toolbarMain)
-        addBTN = findViewById(R.id.addBTN)
+        saveBTN = findViewById(R.id.saveBTN)
+        updateBTN = findViewById(R.id.updateBTN)
+        deleteBTN = findViewById(R.id.deleteBTN)
         nameET = findViewById(R.id.enterNameET)
         weightET = findViewById(R.id.enterWeightET)
         costET = findViewById(R.id.enterCostET)
@@ -83,6 +92,56 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.title = "SQLite"
         setSupportActionBar(toolbar)
+        viewDataAdapter()
+    }
+
+    private fun deleteRecord() {
+        val dialogBuilder = AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(R.layout.delete_dialog, null)
+        dialogBuilder.setView(dialogView)
+        val chooseDeleteId = dialogView.findViewById<EditText>(R.id.deleteIdET)
+
+        dialogBuilder.setTitle("Удалить запись")
+        dialogBuilder.setMessage("Введите индетификатор:")
+        dialogBuilder.setPositiveButton("Удалить") { _, _ ->
+            val deleteId = chooseDeleteId.text.toString()
+            if (deleteId.trim() != "") {
+                val product = Product("", "", "", Integer.parseInt(deleteId))
+                db.removeProduct(product)
+                viewDataAdapter()
+                Toast.makeText(this, "Запись удалена", Toast.LENGTH_SHORT).show()
+            }
+        }
+        dialogBuilder.setNegativeButton("Отмена") { _, _ -> }
+        dialogBuilder.create().show()
+
+    }
+
+    private fun updateRecord() {
+        val dialogBuilder = AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(R.layout.update_dialog, null)
+        dialogBuilder.setView(dialogView)
+        val editId = dialogView.findViewById<EditText>(R.id.updateIdET)
+        val editName = dialogView.findViewById<EditText>(R.id.updatNameET)
+        val editWeight = dialogView.findViewById<EditText>(R.id.updateWeightET)
+        val editCost = dialogView.findViewById<EditText>(R.id.updateCostET)
+
+        dialogBuilder.setTitle("Обновить запись")
+        dialogBuilder.setMessage("Введите данные ниже:")
+        dialogBuilder.setPositiveButton("Обновить") { _, _ ->
+            val updateId = editId.text.toString()
+            val updateName = editName.text.toString()
+            val updateWeight = editWeight.text.toString()
+            val updateCost = editCost.text.toString()
+            if (updateId.trim() != "" && updateName.trim() != "" && updateCost.trim() != "" && updateWeight.trim() != "") {
+                val product = Product(updateName, updateWeight, updateCost, updateId.toInt())
+                db.updateProduct(product)
+                viewDataAdapter()
+                Toast.makeText(this, "Запись обновлена", Toast.LENGTH_SHORT).show()
+            }
+        }
+        dialogBuilder.setNegativeButton("Отмена") { dialog, which -> }
+        dialogBuilder.create().show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

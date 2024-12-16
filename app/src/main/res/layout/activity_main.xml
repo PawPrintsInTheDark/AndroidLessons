@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:background="#FF8A80"
+        android:background="#6750A3"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -48,7 +48,7 @@
     android:orientation="horizontal">
 
     <Button
-        android:id="@+id/addBTN"
+        android:id="@+id/saveBTN"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Сохранить"
@@ -57,7 +57,7 @@
         android:layout_marginVertical="10dp" />
 
     <Button
-        android:id="@+id/editBTN"
+        android:id="@+id/updateBTN"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Изменить"

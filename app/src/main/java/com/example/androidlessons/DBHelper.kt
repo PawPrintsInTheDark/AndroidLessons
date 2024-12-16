@@ -51,7 +51,7 @@ class DBHelper(
         val productList = mutableListOf<Product>()
         val db = this.readableDatabase
         val selectQuery = "SELECT * FROM $TABLE_NAME"
-        var cursor: Cursor? = null
+        var cursor: Cursor?
         try {
             cursor = db.rawQuery(selectQuery, null)
         }catch (e:SQLException){
@@ -64,12 +64,12 @@ class DBHelper(
         var productCost : String
         if (cursor.moveToFirst()) {
             do {
-                cursor.moveToFirst()
-                productId = cursor.getInt(cursor.getColumnIndex(DBHelper.KEY_ID))
-                productName = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_NAME))
-                productWeight = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_WEIGHT))
-                productCost = cursor.getString(cursor.getColumnIndex(DBHelper.KEY_COST))
-                val product = Product(productId ,productName, productWeight, productCost)
+                productId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+                productName = cursor.getString(cursor.getColumnIndex(KEY_NAME))
+                productWeight = cursor.getString(cursor.getColumnIndex(KEY_WEIGHT))
+                productCost = cursor.getString(cursor.getColumnIndex(KEY_COST))
+                val product = Product(productName, productWeight, productCost, productId)
+                productList.add(product)
             } while (cursor.moveToNext())
         }
         cursor.close()
@@ -98,5 +98,6 @@ class DBHelper(
         db.update(TABLE_NAME, values, "id=" + product.id, null)
         db.close()
     }
+
 
 }
