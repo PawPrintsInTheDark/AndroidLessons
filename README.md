@@ -33,4 +33,4 @@
 1. Клонируйте репозиторий:
 
 ```bash
-git clone --branch=SQLitePractice1 https://github.com/PawPrintsInTheDark/AndroidLessons.git
+git clone --branch=SQLitePractice2 https://github.com/PawPrintsInTheDark/AndroidLessons.git
