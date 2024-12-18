@@ -9,6 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CustomAdapter(private val clothes : MutableList<ClothingItem>) : RecyclerView.Adapter<CustomAdapter.ClothesViewHolder>(){
 
+    private var onClothesClickListener: OnClothesClickListener? = null
+
+    interface OnClothesClickListener{
+            fun onClothingClick(clothingItem: ClothingItem, position: Int)
+    }
+
+
     class ClothesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val img : ImageView = itemView.findViewById(R.id.imgListItemIV)
         val name : TextView = itemView.findViewById(R.id.nameListItemTV)
@@ -28,7 +35,17 @@ class CustomAdapter(private val clothes : MutableList<ClothingItem>) : RecyclerV
         holder.img.setImageResource(item.img)
         holder.name.text = item.name
         holder.description.text = item.description
+        holder.itemView.setOnClickListener{
+            if (onClothesClickListener != null){
+                onClothesClickListener!!.onClothingClick(item, position )
+            }
+        }
 
+
+    }
+
+    fun setOnClothesClickListener(onClothesClickListener: OnClothesClickListener){
+        this.onClothesClickListener = onClothesClickListener
 
     }
 }

@@ -1,6 +1,7 @@
 package com.example.androidlessons
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -36,6 +37,10 @@ class SecondActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var recyclerViewRV: RecyclerView
 
+    companion object {
+        private const val REQUEST_CODE = 1
+    }
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,17 +49,46 @@ class SecondActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         recyclerViewRV = findViewById(R.id.recyclerViewLV)
         recyclerViewRV.layoutManager = LinearLayoutManager(this)
+        recyclerViewRV.setHasFixedSize(true)
+
 
         title = "Мой гардероб"
         setSupportActionBar(toolbar)
 
-        recyclerViewRV.adapter = CustomAdapter(clothingItems)
+        val adapter = CustomAdapter(clothingItems)
+        recyclerViewRV.adapter = adapter
+        adapter.setOnClothesClickListener(object :
+            CustomAdapter.OnClothesClickListener {
+            override fun onClothingClick(clothingItem: ClothingItem, position: Int) {
+                val intent = Intent(this@SecondActivity, DetailsActivity::class.java)
+                intent.putExtra("clothes", clothingItem)
+                intent.putExtra("pos", position)
+                startActivityForResult(intent, REQUEST_CODE)
+
+            }
+
+        })
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            val updatedClothes = data?.getSerializableExtra("updatedClothes") as? ClothingItem
+            val position = data?.extras?.getInt("position")
+            if (updatedClothes != null && position != null && position != -1) {
+                clothingItems[position] = updatedClothes
+                recyclerViewRV.adapter?.notifyItemChanged(position)
+            }
+        }
+
 
     }
 
+
     @SuppressLint("ResourceType")
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu ,menu)
+        menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
 
