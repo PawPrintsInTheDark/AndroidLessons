@@ -29,4 +29,4 @@
 1. Клонируйте репозиторий:
 
 ```bash
-git clone --branch=DateTime https://github.com/PawPrintsInTheDark/AndroidLessons.git
+git clone --branch=Fragments1 https://github.com/PawPrintsInTheDark/AndroidLessons.git
