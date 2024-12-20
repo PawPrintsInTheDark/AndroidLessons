@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.fragment.ktx)
     implementation(libs.circleimageview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
