@@ -1,9 +1,11 @@
-package com.example.androidlessons
+package com.example.androidlessons.utils
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.androidlessons.fragment.ViewPagerFragment
+import com.example.androidlessons.models.OnBoardingFragmentViewPagerModel
 
 class ViewPagerAdapter(
     fragment: FragmentActivity,

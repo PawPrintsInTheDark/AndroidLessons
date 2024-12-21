@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.example.androidlessons.models.OnBoardingFragmentViewPagerModel
+import com.example.androidlessons.utils.ViewPagerAdapter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
