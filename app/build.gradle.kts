@@ -36,6 +36,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.viewpager2)
+    implementation(libs.material.v1120)
+
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.circleimageview)
     implementation(libs.androidx.core.ktx)
