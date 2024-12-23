@@ -14,7 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidLessons"
         tools:targetApi="35">
-         <activity
+        <activity
+            android:name=".WorkActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrationActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
