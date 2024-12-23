@@ -51,20 +51,32 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    //retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // picasso
+    implementation("com.squareup.picasso:picasso:2.8")
+
+    //localion
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+
+    implementation("com.sealwu.jsontokotlin:library:3.7.4")
+
     // Room
-    implementation("androidx.room:room-runtime:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
-    // Lifecycle
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion")
-    implementation("androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersion")
-    // RecyclerView
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+//    implementation("androidx.room:room-runtime:2.6.1")
+//    kapt("androidx.room:room-compiler:2.6.1")
+//    implementation("androidx.room:room-ktx:2.6.1")
+//    // Lifecycle
+//    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+//    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion")
+//    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion")
+//    implementation("androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersion")
+//    // RecyclerView
+//    implementation("androidx.recyclerview:recyclerview:1.3.2")
+//    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
     // Coroutines
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0")
+//    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.lifecycleVersion")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.lifecycleVersion")
 

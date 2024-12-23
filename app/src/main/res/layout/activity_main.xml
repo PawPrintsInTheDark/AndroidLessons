@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -8,62 +8,13 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarMain"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:background="#FF8A80"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Контакты" />
-
-
-    <EditText
-        android:id="@+id/surnameET"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="Введите инициалы"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/toolbarMain" />
-
-    <EditText
-        android:id="@+id/phoneET"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:hint="Введите номер телефона"
-        android:inputType="phone"
-        android:textSize="16sp"
-        tools:ignore="HardcodedText"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/surnameET"
-        app:layout_constraintVertical_bias="0.001"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <Button
-        android:id="@+id/saveBTN"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/button_color"
-        android:layout_margin="16dp"
-        android:background="@color/material_dynamic_neutral_variant20"
-        android:onClick="saveData"
-        android:text="Сохранить"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/phoneET" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/saveBTN"
-        app:layout_constraintVertical_bias="1.0"
-        tools:listitem="@layout/list_item"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
