@@ -14,10 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidLessons"
         tools:targetApi="35">
-        <activity
-            android:name=".WeatherActivity"
-            android:exported="false" />
-        <activity
+         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
