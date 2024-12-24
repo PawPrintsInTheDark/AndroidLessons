@@ -1,52 +1,52 @@
 package com.example.androidlessons
 
-import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.androidlessons.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var shopImage: ImageView
-    private lateinit var startShoppingButton: Button
-    private lateinit var layout: LinearLayout
-
-    @SuppressLint("CommitTransaction")
-
+    private lateinit var binding: ActivityMainBinding
+    private var list = mutableListOf(
+        GridViewModal("Home", R.drawable.ic_home),
+        GridViewModal("Chat", R.drawable.ic_chat),
+        GridViewModal("Settings", R.drawable.ic_settings),
+        GridViewModal("Logout", R.drawable.ic_logout),
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setBackground()
+
+        val adapter = GridViewAdapter(list,this)
+        binding.gridViewMainGV.adapter = adapter
+
+        binding.gridViewMainGV.onItemClickListener = AdapterView.OnItemClickListener{parent, view, position, id ->
+            when (position) {
+                0 -> startActivity(Intent(this, HomeActivity::class.java)) // Home
+                1 -> startActivity(Intent(this, ChatActivity::class.java)) // Chat
+                2 -> startActivity(Intent(this, SettingsActivity::class.java)) // Settings
+                3 -> finishAffinity()
+            }
+        }
 
 
-        shopImage = findViewById(R.id.shopImage)
-        startShoppingButton = findViewById(R.id.startShoppingButton)
+    }
 
-        layout = findViewById(R.id.mainLayout)
-        BGAnimation.backgroundAnimation(layout)
-
-        startShoppingButton.setOnClickListener {
-            startShoppingButton.animate()
-                .scaleX(0.9f)
-                .scaleY(0.9f)
-                .setDuration(200)
-                .withEndAction {
-                    startShoppingButton.animate()
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .setDuration(100)
-                        .withEndAction {
-                            startActivity(Intent(this, ProductListActivity::class.java))
-                        }
-                        .start()
-                }
-                .start()
+    private fun setBackground() {
+        val animation: AnimationDrawable = binding.mainLayout.background as AnimationDrawable
+        animation.apply {
+            setEnterFadeDuration(500)
+            setExitFadeDuration(1500)
+            start()
         }
     }
 
