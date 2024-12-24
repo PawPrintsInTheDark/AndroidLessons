@@ -15,10 +15,13 @@
         android:theme="@style/Theme.AndroidLessons"
         tools:targetApi="35">
         <activity
-            android:name=".WorkActivity"
+            android:name=".ReceiptActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProductListActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
