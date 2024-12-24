@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">AndroidLessons</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="api_key">f3f6e2ac81d49f86760f297008db32db</string>
 
 </resources>
