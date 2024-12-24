@@ -14,10 +14,7 @@
 
 ## Демонстрация
 
-<video width="320" height="240" controls>
-  <source src="images/demo.mp4" type="video/mp4">
-  Ваш браузер не поддерживает видео.
-</video>
+[Скачать видео](./images/demo.mp4)
 
 
 ## Установка
