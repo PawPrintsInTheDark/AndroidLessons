@@ -16,10 +16,39 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:title=" Мои контакты" />
 
+    <LinearLayout
+        android:id="@+id/contactInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/nameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Имя" />
+
+        <EditText
+            android:id="@+id/phoneInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Телефон" />
+
+        <Button
+            android:id="@+id/addContactButton"
+            android:layout_width="wrap_content"
+            android:backgroundTint="#3E4F55"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Добавить" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/list_item"/>
+
 
 </LinearLayout>
