@@ -1,12 +1,11 @@
 package com.example.androidlessons
 
-import android.graphics.drawable.AnimationDrawable
+import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.os.Handler
+import android.view.animation.AlphaAnimation
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.navigation.findNavController
 import com.example.androidlessons.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,32 +17,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        backgroundAnimation()
+        supportActionBar?.hide()
+        val fadeOut = AlphaAnimation(1f, 0f)
+        fadeOut.duration = 6000
+
+        binding.mainLayout.startAnimation(fadeOut)
+
+        Handler().postDelayed({
+            val intent = Intent(this@MainActivity, BottomNavActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, 3500)
+
     }
-
-    private fun backgroundAnimation() {
-        val animation: AnimationDrawable = binding.mainLayout.background as AnimationDrawable
-        animation.apply {
-            setEnterFadeDuration(500)
-            setExitFadeDuration(1500)
-            start()
-        }
-    }
-
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.exitMenu -> finishAffinity()
-            else -> return super.onOptionsItemSelected(item)
-        }
-        return true
-    }
-
-
 }
 

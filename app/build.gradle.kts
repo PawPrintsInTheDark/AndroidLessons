@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-//    id("kotlin-kapt") // Для использования KAPT
+    id("kotlin-kapt") // Для использования KAPT
     id("androidx.navigation.safeargs")
 }
 
@@ -53,42 +53,45 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-//    //retrofit
-//    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-//    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-//
-//    // picasso
-//    implementation("com.squareup.picasso:picasso:2.8")
-//
-//    //localion
-//    implementation("com.google.android.gms:play-services-location:21.3.0")
-//
-//    implementation("com.sealwu.jsontokotlin:library:3.7.4")
-//
-//    // Glide
-//    implementation ("com.github.bumptech.glide:glide:4.12.0")
-//    annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
+    //retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    // Room
-//    implementation("androidx.room:room-runtime:2.6.1")
-//    kapt("androidx.room:room-compiler:2.6.1")
-//    implementation("androidx.room:room-ktx:2.6.1")
-//    // Lifecycle
-//    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-//    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion")
-//    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion")
-//    implementation("androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersion")
-//    // RecyclerView
-//    implementation("androidx.recyclerview:recyclerview:1.3.2")
-//    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+    // picasso
+    implementation("com.squareup.picasso:picasso:2.8")
+
+    //localion
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+
+    implementation("com.sealwu.jsontokotlin:library:3.7.4")
+
+    // Glide
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
+
+    //Room
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    // Lifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersion")
+    // RecyclerView
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
     // Coroutines
-//    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0")
-//    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.lifecycleVersion")
-//    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.lifecycleVersion")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.lifecycleVersion")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.lifecycleVersion")
 
     // Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.8.5")

@@ -3,35 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/oneFragment">
+    app:startDestination="@id/personaInfoFragment">
+
 
     <fragment
-        android:id="@+id/oneFragment"
-        android:name="com.example.androidlessons.OneFragment"
-        android:label="fragment_one"
-        tools:layout="@layout/fragment_one">
-        <action
-            android:id="@+id/action_oneFragment_to_twoFragment"
-            app:destination="@id/twoFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right">
-            <argument
-                android:name="myArg"
-                />
-        </action>
-
-    </fragment>
+        android:id="@+id/personaInfoFragment"
+        android:name="com.example.androidlessons.ui.personalinfo.PersonalInfoFragment"
+        android:label="Personal Info"
+        tools:layout="@layout/fragment_personal_info" />
     <fragment
-        android:id="@+id/twoFragment"
-        android:name="com.example.androidlessons.TwoFragment"
-        android:label="fragment_two"
-        tools:layout="@layout/fragment_two">
-
-        <argument
-            android:name="myArg"
-            android:defaultValue="ApplicationAndroid" />
-    </fragment>
-
+        android:id="@+id/noteFragment"
+        android:name="com.example.androidlessons.ui.note.NoteFragment"
+        android:label="Note"
+        tools:layout="@layout/fragment_note" />
+    <fragment
+        android:id="@+id/WeatherFragment"
+        android:name="com.example.androidlessons.ui.weather.WeatherFragment"
+        android:label="Weather"
+        tools:layout="@layout/fragment_weather" />
 </navigation>

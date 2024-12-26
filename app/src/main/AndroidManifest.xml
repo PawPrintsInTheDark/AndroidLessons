@@ -3,6 +3,9 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <dist:module dist:instant="true" />
 
@@ -16,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidLessons"
         tools:targetApi="35">
+        <activity
+            android:name=".BottomNavActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
