@@ -3,22 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/personaInfoFragment">
-
-
+    app:startDestination="@id/registerFragment">
     <fragment
-        android:id="@+id/personaInfoFragment"
-        android:name="com.example.androidlessons.ui.personalinfo.PersonalInfoFragment"
-        android:label="Personal Info"
-        tools:layout="@layout/fragment_personal_info" />
+        android:id="@+id/registerFragment"
+        android:name="com.example.androidlessons.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
     <fragment
-        android:id="@+id/noteFragment"
-        android:name="com.example.androidlessons.ui.note.NoteFragment"
-        android:label="Note"
-        tools:layout="@layout/fragment_note" />
+        android:id="@+id/loginFragment"
+        android:name="com.example.androidlessons.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
     <fragment
-        android:id="@+id/WeatherFragment"
-        android:name="com.example.androidlessons.ui.weather.WeatherFragment"
-        android:label="Weather"
-        tools:layout="@layout/fragment_weather" />
+        android:id="@+id/mailFragment"
+        android:name="com.example.androidlessons.MailFragment"
+        android:label="fragment_mail"
+        tools:layout="@layout/fragment_mail" />
 </navigation>
