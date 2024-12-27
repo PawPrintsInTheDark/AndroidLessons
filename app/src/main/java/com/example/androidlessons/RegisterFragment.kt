@@ -1,12 +1,11 @@
 package com.example.androidlessons
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.androidlessons.databinding.FragmentRegisterBinding
 import com.google.firebase.Firebase
@@ -39,6 +38,7 @@ class RegisterFragment : Fragment() {
         val email = binding.emailSignUpET.text.toString()
         val pass = binding.passwordSignUpET.text.toString()
         val confirmPassword = binding.passwordConfirmSignUpET.text.toString()
+
         if (email.isBlank() || pass.isBlank() || confirmPassword.isBlank()) {
             Toast.makeText(
                 requireContext(),
@@ -52,20 +52,18 @@ class RegisterFragment : Fragment() {
             return
         }
 
-        auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener{ task ->
+        auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Toast.makeText(requireContext(), "Успешно зарегестрирован", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Успешно зарегистрирован", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.mailFragment)
             } else {
-                if (auth.currentUser != null && task.exception?.message == null) {
-                    Toast.makeText(requireContext(), "Пользователь уже существует", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.loginFragment)
+                // Обработка ошибок
+                task.exception?.let { exception ->
+                    Toast.makeText(requireContext(), exception.message, Toast.LENGTH_SHORT).show()
                 }
-                Toast.makeText(requireContext(), "Регистрация не прошла", Toast.LENGTH_SHORT).show()
             }
-            task.addOnFailureListener{ err ->
-                Toast.makeText(requireContext(), err.message, Toast.LENGTH_SHORT).show()
-            }
+        }.addOnFailureListener { err ->
+            Toast.makeText(requireContext(), err.message, Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -16,7 +16,7 @@
         tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/mailFragment"
-        android:name="com.example.androidlessons.MailFragment"
+        android:name="com.example.androidlessons.ContactsFragment"
         android:label="fragment_mail"
-        tools:layout="@layout/fragment_mail" />
+        tools:layout="@layout/fragment_contacts" />
 </navigation>
