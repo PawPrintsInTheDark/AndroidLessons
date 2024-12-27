@@ -35,6 +35,14 @@ class LoginFragment : Fragment() {
     private fun login() {
         val email = binding.emailET.text.toString()
         val password = binding.passwordET.text.toString()
+        if (email.isBlank() || password.isBlank()) {
+            Toast.makeText(
+                requireContext(),
+                "Адрес электронной почты и пароль не могут быть пустыми",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
 
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener{
             if (it.isSuccessful){

@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="Login In" />
+            android:text="Войти" />
 
         <TextView
             android:id="@+id/RedirectSignUpTV"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:gravity="center_horizontal"
-            android:text="Don`t have an accaunt sign in"
+            android:text="Необходима регистрация"
             android:textColor="#18206F"
             android:textSize="16sp"
             android:visibility="gone" />

@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="Sign In"/>
+            android:text="Зарегистрироваться"/>
 
         <TextView
             android:id="@+id/tvRedirectLogin"
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_margin="10dp"
-            android:text="Alredy have an account? Login"
+            android:text="Уже есть аккаунт"
             android:textColor="#18206F"
             android:textSize="16sp"/>
 
