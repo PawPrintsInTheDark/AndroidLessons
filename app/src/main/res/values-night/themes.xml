@@ -2,11 +2,5 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.AndroidLessons" parent="Theme.Material3.DayNight.NoActionBar">
     </style>
-    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimaryDark</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
-        <item name="colorOnPrimary">@android:color/white</item>
-        <item name="colorSecondary">@color/colorSecondary</item>
-        <item name="colorOnSecondary">@android:color/white</item>
-    </style>
+
 </resources>

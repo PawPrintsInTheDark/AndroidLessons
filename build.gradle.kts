@@ -2,14 +2,14 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
-    id("androidx.navigation.safeargs.kotlin") version "2.8.5" apply false
+//    id("androidx.navigation.safeargs.kotlin") version "2.8.5" apply false
     alias(libs.plugins.google.gms.google.services) apply false
 }
 buildscript {
     repositories {
         google()
     }
-    dependencies {
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.8.5")
-    }
+//    dependencies {
+//        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.8.5")
+//    }
 }
