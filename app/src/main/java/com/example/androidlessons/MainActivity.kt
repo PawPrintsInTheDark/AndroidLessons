@@ -1,53 +1,53 @@
 package com.example.androidlessons
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import dagger.hilt.android.AndroidEntryPoint
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import com.example.androidlessons.adapter.MainAdapter
+import com.example.androidlessons.adapter.MainLoadStateAdapter
+import com.example.androidlessons.databinding.ActivityMainBinding
+import com.example.androidlessons.model.RetrofitInstance
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var viewModel: CurrencyViewModel
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: CurrencyAdapter
+    private lateinit var binding: ActivityMainBinding
+    private val viewModel: MainViewModel by viewModels {
+        MainViewModelFactory(RetrofitInstance.api, "ee3b7bce1c7090fc83a092263926e6a9")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = "Валюты мира"
+        val adapter = MainAdapter()
+        binding.recyclerView.adapter = adapter.withLoadStateFooter(MainLoadStateAdapter())
 
-        recyclerView = findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        lifecycleScope.launch {
+            viewModel.data.collectLatest { pagingData ->
+                adapter.submitData(pagingData)
+            }
+        }
 
-        viewModel = ViewModelProvider(this)[CurrencyViewModel::class.java]
+        adapter.addLoadStateListener { loadState ->
+            binding.progressBar.visibility = if (loadState.source.refresh is LoadState.Loading) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
 
-            viewModel.currencies.observe(this) { currencies ->
-            adapter = CurrencyAdapter(currencies)
-            recyclerView.adapter = adapter
+            val errorState = loadState.source.refresh as? LoadState.Error
+            if (errorState != null) {
+                binding.errorMessage.visibility = View.VISIBLE
+                binding.errorMessage.text = errorState.error.localizedMessage
+            } else {
+                binding.errorMessage.visibility = View.GONE
+            }
         }
     }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        finishAffinity()
-        return false
-    }
 }
-
-
-
